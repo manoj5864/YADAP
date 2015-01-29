@@ -15,7 +15,7 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.3.2",
   "org.webjars" % "angularjs" % "1.3.8",
   "org.webjars" % "requirejs" % "2.1.15",
-  "mysql" % "mysql-connector-java" % "5.1.18",
+  "postgresql" % "postgresql" % "9.1-901-1.jdbc4",
   "be.objectify" %% "deadbolt-java" % "2.3.1",
   "com.feth" % "play-authenticate_2.11" % "0.6.8"
 )
