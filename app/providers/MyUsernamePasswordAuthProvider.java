@@ -120,16 +120,16 @@ public class MyUsernamePasswordAuthProvider extends UsernamePasswordAuthProvider
 	}
 
 	@Override
-	protected SignupResult signupUser(final MyUsernamePasswordAuthUser user) {
+	protected UsernamePasswordAuthProvider.SignupResult signupUser(final MyUsernamePasswordAuthUser user) {
 		final User u = User.findByUsernamePasswordIdentity(user);
 		if (u != null) {
 			if (u.emailValidated) {
 				// This user exists, has its email validated and is active
-				return SignupResult.USER_EXISTS;
+				return UsernamePasswordAuthProvider.SignupResult.USER_EXISTS;
 			} else {
 				// this user exists, is active but has not yet validated its
 				// email
-				return SignupResult.USER_EXISTS_UNVERIFIED;
+				return UsernamePasswordAuthProvider.SignupResult.USER_EXISTS_UNVERIFIED;
 			}
 		}
 		// The user either does not exist or is inactive - create a new one
@@ -139,33 +139,33 @@ public class MyUsernamePasswordAuthProvider extends UsernamePasswordAuthProvider
 		// if you return
 		// return SignupResult.USER_CREATED;
 		// then the user gets logged in directly
-		return SignupResult.USER_CREATED_UNVERIFIED;
+		return UsernamePasswordAuthProvider.SignupResult.USER_CREATED_UNVERIFIED;
 	}
 
 	@Override
-	protected LoginResult loginUser(final MyLoginUsernamePasswordAuthUser authUser) {
+	protected UsernamePasswordAuthProvider.LoginResult loginUser(final MyLoginUsernamePasswordAuthUser authUser) {
 		final User u = User.findByUsernamePasswordIdentity(authUser);
 		if (u == null) {
-			return LoginResult.NOT_FOUND;
+			return UsernamePasswordAuthProvider.LoginResult.NOT_FOUND;
 		} else {
 			if (!u.emailValidated) {
-				return LoginResult.USER_UNVERIFIED;
+				return UsernamePasswordAuthProvider.LoginResult.USER_UNVERIFIED;
 			} else {
 				for (final LinkedAccount acc : u.linkedAccounts) {
 					if (getKey().equals(acc.providerKey)) {
 						if (authUser.checkPassword(acc.providerUserId, authUser.getPassword())) {
 							// Password was correct
-							return LoginResult.USER_LOGGED_IN;
+							return UsernamePasswordAuthProvider.LoginResult.USER_LOGGED_IN;
 						} else {
 							// if you don't return here,
 							// you would allow the user to have
 							// multiple passwords defined
 							// usually we don't want this
-							return LoginResult.WRONG_PASSWORD;
+							return UsernamePasswordAuthProvider.LoginResult.WRONG_PASSWORD;
 						}
 					}
 				}
-				return LoginResult.WRONG_PASSWORD;
+				return UsernamePasswordAuthProvider.LoginResult.WRONG_PASSWORD;
 			}
 		}
 	}
