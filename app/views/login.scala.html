@@ -1,0 +1,51 @@
+@(loginForm: Form[_])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapBasic.f) }
+@import com.feth.play.module.pa.views.html._
+
+@main(Messages("playauthenticate.login.title"),"login") {
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+<div class="wrap">
+    <div><h1><label> @Messages("playauthenticate.login.title")</label></h1></div>
+    <div style="padding-left: 5%">
+        <h2><a href="#">@Messages("playauthenticate.login.oauth")</a></h2>
+        @_providerPartial(skipCurrent=false)
+    </div>
+    <hr />
+    <div style="padding-left: 5%">
+        @helper.form(routes.Application.doLogin, 'role -> "form", 'class -> "loginForm") {
+        <div class="inset">
+            @if(loginForm.hasGlobalErrors) {
+            <p class="alert alert-danger">
+                @loginForm.globalError.message
+            </p>
+            }
+            @_emailPartial(loginForm)
+
+            <p>
+                @inputPassword(loginForm("password"), '_showConstraints -> false, 'placeholder -> "password",
+                'class -> "loginInput", '_label -> Messages("playauthenticate.login.password.placeholder")
+                )
+            </p>
+            <p>
+                <input type="checkbox" name="remember" id="remember" />
+                <label for="remember">Remember me</label>
+                <span style="padding-left: 15px"><a href="javascript:void(0);" onclick="window.location.href = jsRoutes.controllers.Signup.forgotPassword($('#email').val() || null).absoluteURL();">@Messages("playauthenticate.login.forgot.password")</a></span>
+            </p>
+        </div>
+
+        <p class="p-container">
+            <input type="submit" value="@Messages("playauthenticate.login.now")" class="login" />
+        </p>
+
+        }
+    </div>
+    <hr />
+    <div style="padding-left: 5%">
+        <h2><a href="@routes.Application.signup()">Don't have an account? @Messages("playauthenticate.navigation.signup")!</a></h2>
+    </div>
+</div>
+<div class="clear"></div>
+}
+

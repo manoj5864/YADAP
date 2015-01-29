@@ -1,0 +1,39 @@
+@(signupForm: Form[_])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapBasic.f) }
+
+@main(Messages("playauthenticate.signup.title"),"signup") {
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+
+    <div class="wrap">
+        <div>
+            <h1><label> @Messages("playauthenticate.signup.title")</label></h1>
+            @_providerPartial(skipCurrent=false)
+        </div>
+        <div  style="padding-left: 5%">
+            @helper.form(routes.Application.doSignup, 'role -> "form", 'class -> "loginForm") {
+                <div class="inset">
+                    @if(signupForm.hasGlobalErrors) {
+                        <p class="alert alert-danger"> @signupForm.globalError.message </p>
+                    }
+
+                    <p>
+                        @inputText(signupForm("name"),
+                        'class -> "loginInput", '_label -> Messages("playauthenticate.signup.name")
+                        )
+                    </p>
+
+                    @_emailPartial(signupForm)
+
+                    @_passwordPartial(signupForm)
+                </div>
+
+                <p class="p-container">
+                    <button type="submit" class="login btn btn-default">@Messages("playauthenticate.signup.now")</button>
+                </p>
+            }
+        </div>
+    </div>
+    <div class="clear"></div>
+}
