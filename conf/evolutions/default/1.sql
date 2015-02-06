@@ -3,31 +3,6 @@
 
 # --- !Ups
 
-
-drop table if exists linked_account cascade;
-
-drop table if exists security_role cascade;
-
-drop table if exists token_action cascade;
-
-drop table if exists users cascade;
-
-drop table if exists users_security_role cascade;
-
-drop table if exists users_user_permission cascade;
-
-drop table if exists user_permission cascade;
-
-drop sequence if exists linked_account_seq;
-
-drop sequence if exists security_role_seq;
-
-drop sequence if exists token_action_seq;
-
-drop sequence if exists users_seq;
-
-drop sequence if exists user_permission_seq;
-
 create table linked_account (
   id                        bigint not null,
   user_id                   bigint,

@@ -48,3 +48,9 @@ GET     /login/password/forgot      controllers.Signup.forgotPassword(email: Str
 POST    /login/password/forgot      controllers.Signup.doForgotPassword
 
 GET     /aboutus                    controllers.Application.aboutus
+
+
+GET /listCompanies controllers.CompanyController.index()
+POST /companies controllers.CompanyController.companies()
+#POST /companies controllers.CompanyController.newCompany()
+#POST /companies/:id/delete controllers.CompanyController.deleteCompany(id: String)

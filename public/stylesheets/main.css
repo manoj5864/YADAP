@@ -132,3 +132,25 @@ body {
     margin-top: 120px;
   }
 }
+
+
+/* ---------------------------------------- */
+/* DATATABLES */
+/* ---------------------------------------- */
+
+.dataTables_wrapper {
+    margin-bottom: 15px;
+}
+
+#showcase-fixedcolumns th, #showcase-fixedcolumns td {
+    white-space: nowrap;
+}
+#showcase-fixedcolumns_wrapper.dataTables_wrapper {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.company_thumb_url {
+    width: 25%;
+    height: 25%
+}
