@@ -11,13 +11,13 @@
     vm.dtOptions = DTOptionsBuilder.newOptions()
           .withOption('sAjaxSource', '/companies')
           .withDataProp('data')
-          .withOption('sorting', [[0, null], [1, 'asc']])
+          .withOption('order', [[1, 'asc']])
           .withDisplayLength(10)
           .withOption('processing', true)
           .withOption('serverSide', true)
           .withOption('pagingType', 'full_numbers')
           .withBootstrap()
-          .withOption('fnServerData', function (sSource, aoData, fnCallback) {
+          .withOption('fnServerData', function(sSource, aoData, fnCallback) {
               $.ajax({
                   "dataType": "json",
                   "type": "POST",
@@ -32,9 +32,11 @@
 
 
       vm.dtColumns = [
-          DTColumnBuilder.newColumn('thumb_url').withTitle(''),
+          DTColumnBuilder.newColumn('thumb_url').withTitle('')
+          .withOption("bSortable", false).withOption("bSortable", false),
           DTColumnBuilder.newColumn('name').withTitle('Name'),
           DTColumnBuilder.newColumn('high_concept').withTitle('Overview')
+          .withOption("bSearchable", false).withOption("bSortable", false)
       ];
 
     });

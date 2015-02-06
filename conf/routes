@@ -51,6 +51,7 @@ GET     /aboutus                    controllers.Application.aboutus
 
 
 GET /listCompanies controllers.CompanyController.index()
+GET /companies/:id controllers.CompanyController.show(id: String)
 POST /companies controllers.CompanyController.companies()
 #POST /companies controllers.CompanyController.newCompany()
 #POST /companies/:id/delete controllers.CompanyController.deleteCompany(id: String)

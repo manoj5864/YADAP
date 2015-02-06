@@ -1,0 +1,12 @@
+@(companyDetails: Company)
+
+@import helper._
+@import com.feth.play.module.pa.views.html._
+
+@main("Company Overview") {
+    <div>
+        ID: @companyDetails.id <br />
+        Name: @companyDetails.name <br />
+        Overview: @companyDetails.high_concept
+    </div>
+}

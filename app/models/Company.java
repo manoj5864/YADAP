@@ -1,11 +1,13 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import org.bson.types.ObjectId;
+import controllers.routes;
 import org.jongo.MongoCollection;
+import org.jongo.marshall.jackson.oid.ObjectId;
 import play.libs.Json;
 
 import java.util.ArrayList;
@@ -18,8 +20,9 @@ import java.util.Map;
 public class Company {
 
 //    @Id
-//    @ObjectId
-    public ObjectId id;
+    @JsonProperty("_id")
+    @ObjectId
+    public String id;
 
     public String name;
 
@@ -84,19 +87,16 @@ public class Company {
         create(new Company(name));
     }
 
-    public static void delete(ObjectId id) {
-        //org.bson.types.ObjectId oid =  new org.bson.types.ObjectId(id);
-        Company company = Company.coll.findOne(id).as(Company.class);
-        if (company != null)
-            Company.coll.remove(id);
-    }
-
     public static void removeAll(){
         Company.coll.drop();
     }
 
     public static long getTotalNumberOfRecords() {
         return Company.coll.count();
+    }
+
+    public static Company findCompanyByID(String id) {
+        return Company.coll.findOne(new org.bson.types.ObjectId(id)).as(Company.class);
     }
 
     public static ObjectNode getPaginatedResults(Map<String, String[]> params) {
@@ -143,14 +143,13 @@ public class Company {
         for(Company c: recordsToDisplayAsList) {
             if(i >= pageSize)
                 break;
+
             ObjectNode resultC = Json.newObject();
             resultC.put("name", c.name);
             resultC.put("high_concept", c.high_concept);
-            resultC.put("thumb_url", "<img class='company_thumb_url' src='"+c.thumb_url+"'>");
+            resultC.put("thumb_url", "<a href='"+ routes.CompanyController.show(c.id.toString()) +"'><img class='company_thumb_url' src='"+c.thumb_url+"'></a>");
 
             an.add(resultC);
-
-            //an.add(Json.toJson(c));
             i++;
         }
 

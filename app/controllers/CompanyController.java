@@ -1,11 +1,11 @@
 package controllers;
 
 import models.Company;
-import org.bson.types.ObjectId;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.company.index;
+import views.html.company.*;
 
 /**
  * Created by manoj on 2/4/15.
@@ -22,19 +22,8 @@ public class CompanyController extends Controller {
         //return ok(Company.getPaginatedResults(request().queryString()));
     }
 
-    public static Result newCompany() {
-        Form<Company> filledForm = companyForm.bindFromRequest();
-//        if(filledForm.hasErrors()) {
-//            return badRequest(companies.render(Company.getPaginatedResults(request())));
-//        } else {
-            Company.create(filledForm.get());
-            return redirect(routes.CompanyController.companies());
-//        }
-    }
-
-    public static Result deleteCompany(String id) {
-        ObjectId oid =  new org.bson.types.ObjectId(id);
-        Company.delete(oid);
-        return redirect(routes.CompanyController.companies());
+    public static Result show(String id) {
+        Company c = Company.findCompanyByID(id);
+        return ok(show.render(c));
     }
 }
