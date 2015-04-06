@@ -27,7 +27,9 @@ libraryDependencies ++= Seq(
   "org.webjars" % "requirejs" % "2.1.15",
   "org.webjars" % "angular-datatables" % "0.3.0",
   "org.webjars" % "datatables" % "1.10.4",
-  "org.webjars" % "datatables-bootstrap" % "2-20120202-2"
+  "org.webjars" % "datatables-bootstrap" % "2-20120202-2",
+  "com.wordnik" %% "swagger-play2" % "1.3.12" exclude("org.reflections", "reflections"),
+  "org.reflections" % "reflections" % "0.9.8" notTransitive ()
 )
 
 resolvers ++= Seq(

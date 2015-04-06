@@ -55,3 +55,5 @@ GET /companies/:id controllers.CompanyController.show(id: String)
 POST /companies controllers.CompanyController.companies()
 #POST /companies controllers.CompanyController.newCompany()
 #POST /companies/:id/delete controllers.CompanyController.deleteCompany(id: String)
+
+GET  /api-docs.json  controllers.ApiHelpController.getResources
