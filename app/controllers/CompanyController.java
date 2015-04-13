@@ -1,12 +1,17 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
+import commons.StaticFunctions;
 import models.Company;
 import play.data.Form;
+import play.libs.Json;
+import play.libs.Json.*;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.company.index;
@@ -36,5 +41,10 @@ public class CompanyController extends Controller {
     public static Result show(String id) {
         Company c = Company.findCompanyByID(id);
         return ok(show.render(c));
+    }
+
+    @BodyParser.Of(play.mvc.BodyParser.Json.class)
+    public static Result getSimilarCompanies(String id) {
+        return ok(Company.getSimilarCompanies("company_id"));
     }
 }

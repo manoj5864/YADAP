@@ -1,3 +1,6 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Raleway:700,400);
+
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
@@ -7,6 +10,9 @@ body {
   color: #5a5a5a;
 }
 
+.container_content {
+  min-height: 500px;
+}
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
@@ -153,4 +159,33 @@ body {
 .company_thumb_url {
     width: 50%;
     height: 50%;
+}
+
+.company_logo_small {
+    width: 70px;
+    height: 70px;
+}
+
+.company_photo {
+    -moz-box-sizing: border-box;
+    background-color: #F8F9FA;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) inset;
+    height: 94px;
+    line-height: 80px;
+    margin-right: 18px;
+    overflow: hidden;
+    padding: 5px;
+    vertical-align: middle;
+    width: 10%;
+    margin-left: 5%;
+}
+
+.company_text {
+    margin-right: 5%;
+    overflow: hidden;
+    padding: 5px;
+    vertical-align: middle;
+    width: 70%;
 }

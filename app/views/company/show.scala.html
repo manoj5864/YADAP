@@ -5,8 +5,202 @@
 
 @main("Company Overview") {
     <div>
-        ID: @companyDetails.id <br />
-        Name: @companyDetails.name <br />
-        Overview: @companyDetails.high_concept
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="company_photo col-md-2">
+                        <img src=@companyDetails.thumb_url alt="Company logo" />
+                    </div>
+                    <div class="company_text col-md-10">
+                        <h2>@companyDetails.name</h2>
+                        <h4>@companyDetails.high_concept</h4>
+                        <div>
+                            <br />
+                            <ul class="list-inline">
+                            @for(index <- 0 until companyDetails.markets.size){
+                                <li>@companyDetails.markets(index).display_name</li>
+                            }
+                            </ul>
+                        </div>
+                        <div>
+                            <a href="@companyDetails.company_url">@companyDetails.company_url</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+              <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Social Media</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <ul>
+                                <li>
+                                    <a class="icon rounded fa fa-twitter" href="@companyDetails.twitter_url" target="_blank"><span class="label">Twitter</span></a>
+                                </li>
+                                <li>
+                                    <a class="icon rounded fa fa-facebook-official" href="@companyDetails.facebook_url" target="_blank"><span class="label">Facebook</span></a>
+                                </li>
+                                <li>
+                                    <a class="icon rounded fa fa-linkedin-square" href="@companyDetails.linkedin_url" target="_blank"><span class="label">LinkedIn</span></a>
+                                </li>
+                                <li>
+                                    <a class="icon rounded fa fa-edit" href="@companyDetails.blog_url" target="_blank"><span class="label">Blog</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Company Size</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            @companyDetails.company_size
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Rating</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            @companyDetails.quality
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Contact Details</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <b>Phone:</b> <br />
+                            <b>Fax:</b> <br />
+                            <b>Mail:</b> <br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Age</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Revenue</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @if(!companyDetails.product_desc.isEmpty) {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Product Description</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                @companyDetails.product_desc <br />
+                                video, screenshots ..........
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Locations</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <ul class="list-inline">
+                                    @for(index <- 0 until companyDetails.locations.size){
+                                        <li>@companyDetails.locations(index).display_name</li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col-md-8">
+                                <div id="map-canvas" style="min-height: 200px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Stock Market Trends</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div></div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Employees</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Similar Companies</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div data-ng-controller="SimilarCompaniesCtrl" ng-init="init('@companyDetails.id')">
+                            <div ng-repeat="company in similarCompanies">
+                                <div ng-repeat="keys in company">
+                                    <span ng-bind-html="keys.thumb_url | sanitize"></span> &nbsp;&nbsp;&nbsp;{{keys.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Certificates</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div></div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Followers Count</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            @companyDetails.follower_count
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 }
