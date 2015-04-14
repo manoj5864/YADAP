@@ -5,47 +5,75 @@
 @import com.feth.play.module.pa.views.html._
 
 @main(Messages("playauthenticate.login.title"),"login") {
-<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
-<div class="wrap">
-    <div><h1><label> @Messages("playauthenticate.login.title")</label></h1></div>
-    <div style="padding-left: 5%">
-        <h2><a href="#">@Messages("playauthenticate.login.oauth")</a></h2>
-        @_providerPartial(skipCurrent=false)
-    </div>
-    <hr />
-    <div style="padding-left: 5%">
-        @helper.form(routes.Application.doLogin, 'role -> "form", 'class -> "loginForm") {
-        <div class="inset">
-            @if(loginForm.hasGlobalErrors) {
-            <p class="alert alert-danger">
-                @loginForm.globalError.message
-            </p>
-            }
-            @_emailPartial(loginForm)
+    <div class="container">
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info" >
+                <div class="panel-heading">
+                    <div class="panel-title">@Messages("playauthenticate.login.title")</div>
+                    <div style="float:right; font-size: 80%; position: relative; top:-10px">
+                        <a href="javascript:void(0);" onclick="window.location.href = jsRoutes.controllers.Signup.forgotPassword($('#email').val() || null).absoluteURL();">@Messages("playauthenticate.login.forgot.password")</a>
+                    </div>
+                </div>
 
-            <p>
-                @inputPassword(loginForm("password"), '_showConstraints -> false, 'placeholder -> "password",
-                'class -> "loginInput", '_label -> Messages("playauthenticate.login.password.placeholder")
-                )
-            </p>
-            <p>
-                <input type="checkbox" name="remember" id="remember" />
-                <label for="remember">Remember me</label>
-                <span style="padding-left: 15px"><a href="javascript:void(0);" onclick="window.location.href = jsRoutes.controllers.Signup.forgotPassword($('#email').val() || null).absoluteURL();">@Messages("playauthenticate.login.forgot.password")</a></span>
-            </p>
+                <div style="padding-top:30px" class="panel-body" >
+                    <div class="row">
+                        <div class="col-md-6" style="border-right: 1px solid#888;">
+                            @helper.form(routes.Application.doLogin, 'role -> "form", 'class -> "form-horizontal", 'id -> "loginform") {
+                                <div class="inset">
+                                    @if(loginForm.hasGlobalErrors) {
+                                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12">
+                                        @loginForm.globalError.message
+                                        </div>
+                                    }
+
+                                    @_emailPartial(loginForm)
+
+                                    <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input type="password" class="$1form-control" name="password" placeholder="password" showConstraints=false>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top:10px" class="form-group">
+                                    <div class="col-sm-12 controls">
+                                        <input id="btn-login" class="btn btn-success" type="submit" value="@Messages("playauthenticate.login.now")" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-6">
+                            <div style="margin-top:20px">
+                                <div class="col-sm-12 controls" style="font-size: 90%;">
+                                    <a href="#">@Messages("playauthenticate.login.oauth")</a> <br /><br />
+                                    @_providerPartial(skipCurrent=false)
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 control">
+                                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%;" >
+                                    Don't have an account!
+                                    <a href="@routes.Application.signup()">
+                                    @Messages("playauthenticate.navigation.signup")
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <p class="p-container">
-            <input type="submit" value="@Messages("playauthenticate.login.now")" class="login" />
-        </p>
-
-        }
     </div>
-    <hr />
-    <div style="padding-left: 5%">
-        <h2><a href="@routes.Application.signup()">Don't have an account? @Messages("playauthenticate.navigation.signup")!</a></h2>
-    </div>
-</div>
-<div class="clear"></div>
+    <div class="clear"></div>
 }
-

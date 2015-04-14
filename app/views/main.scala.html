@@ -81,7 +81,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                         <li class="active"><a href="@routes.Application.index()">@Messages("playauthenticate.navigation.home") <span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="@routes.Application.index()">@Messages("playauthenticate.navigation.home") <span class="sr-only">(current)</span></a></li>
                         <li><a href="@routes.Application.aboutus()">About Us</a></li>
                         <!--
                         <li class="dropdown">
@@ -98,9 +98,7 @@
                         </li>
                         -->
                         @subjectPresentOr() {
-                        <li>
                             <li><a href="@routes.CompanyController.index()">Companies</a></li>
-                        </li>
                         } { }
                     </ul>
                     @subjectPresentOr() {

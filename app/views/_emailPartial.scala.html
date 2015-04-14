@@ -3,8 +3,7 @@
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapBasic.f) }
 
-
-<p>
-    @inputText(f("email"), '_showConstraints -> constraints, 'placeholder -> "mustermann@test.com",
-    'class -> "loginInput", '_label -> Messages("playauthenticate.login.email.placeholder"))
-</p>
+<div style="margin-bottom: 25px" class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input type="text" class="$1form-control" name="email" value="" placeholder="mustermann@@test.com">
+</div>

@@ -3,37 +3,56 @@
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapBasic.f) }
 
-@main(Messages("playauthenticate.signup.title"),"signup") {
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
-
-    <div class="wrap">
-        <div>
-            <h1><label> @Messages("playauthenticate.signup.title")</label></h1>
-            @_providerPartial(skipCurrent=false)
-        </div>
-        <div  style="padding-left: 5%">
-            @helper.form(routes.Application.doSignup, 'role -> "form", 'class -> "loginForm") {
-                <div class="inset">
-                    @if(signupForm.hasGlobalErrors) {
-                        <p class="alert alert-danger"> @signupForm.globalError.message </p>
-                    }
-
-                    <p>
-                        @inputText(signupForm("name"),
-                        'class -> "loginInput", '_label -> Messages("playauthenticate.signup.name")
-                        )
-                    </p>
-
-                    @_emailPartial(signupForm)
-
-                    @_passwordPartial(signupForm)
+@main(Messages("playauthenticate.signup.title"), "signup") {
+    <div class="container">
+        <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">Sign Up</div>
+                    <div style="float:right; font-size: 85%; position: relative; top:-10px">
+                        <a id="signinlink" href="@routes.Application.login()">@Messages("playauthenticate.navigation.login")</a>
+                    </div>
                 </div>
+                <div class="panel-body" >
+                    @helper.form(routes.Application.doSignup, 'role -> "form", 'class -> "form-horizontal", 'id -> "signupform") {
+                        <div class="inset">
+                            @if(signupForm.hasGlobalErrors) {
+                                <div id="signupalert" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span>@signupForm.globalError.message</span>
+                                </div>
+                            }
 
-                <p class="p-container">
-                    <button type="submit" class="login btn btn-default">@Messages("playauthenticate.signup.now")</button>
-                </p>
-            }
+                            <div class="form-group">
+                                <label for="name" class="col-md-3 control-label">Name</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="$lform-control" name="name" placeholder=@Messages("playauthenticate.signup.name")>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="col-md-3 control-label">Email</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="$lform-control" name="email" value="" placeholder="mustermann@@test.com">
+                                </div>
+                            </div>
+
+                            @_passwordPartial(signupForm)
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-3">
+                                <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp @Messages("playauthenticate.signup.now")</button>
+                            </div>
+                            <div class="col-md-1">or</div>
+                            <div class="col-md-4">
+                            @_providerPartial(skipCurrent=false)
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
         </div>
     </div>
-    <div class="clear"></div>
 }
