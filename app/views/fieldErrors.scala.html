@@ -1,0 +1,12 @@
+@(elements: helper.FieldElements)
+
+<p style="font-size: 80%;">
+    <span class="help-block text-muted">@elements.infos.mkString(", ")</span>
+    @if(elements.hasErrors) {
+        <span class="help-block alert alert-danger col-sm-12">@elements.errors.mkString(", ")</span>
+    }
+</p>
+
+<!--
+<div class="form-group @if(elements.hasErrors) {has-error}"></div>
+-->

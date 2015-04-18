@@ -7,6 +7,7 @@ import com.feth.play.module.pa.PlayAuthenticate;
 import com.feth.play.module.pa.user.AuthUser;
 import models.User;
 import play.data.Form;
+import play.api.data.Forms;
 import play.data.format.Formats.NonEmpty;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
