@@ -114,7 +114,7 @@ public class Company {
         if(params.get("sSearch") != null) {
             filter = params.get("sSearch")[0];
         }
-        System.out.println(filter);
+
         Integer pageSize = Integer.valueOf(params.get("iDisplayLength")[0]);
 
 //      Integer page = Integer.valueOf(params.get("iDisplayStart")[0]) / pageSize;
@@ -136,7 +136,8 @@ public class Company {
         if(Strings.isNullOrEmpty(filter)) {
             recordsToDisplay = Company.coll.find("{}").skip(start).sort("{" + sortBy + ": "+orderId+"}").as(Company.class);
         } else {
-            recordsToDisplay = Company.coll.find("{name: {$regex: '.*"+filter+".*'}}").skip(start).sort("{"+sortBy+": "+orderId+"}").as(Company.class);
+            recordsToDisplay = Company.coll.find("{ $or: [ {name: {$regex: '.*"+filter+".*'}}, {high_concept: {$regex: '.*"+filter+".*'}} ] }").
+                    skip(start).sort("{"+sortBy+": "+orderId+"}").as(Company.class);
         }
 
         ArrayList<Company> recordsToDisplayAsList = Lists.newArrayList(recordsToDisplay);
@@ -158,7 +159,7 @@ public class Company {
             resultC.put("name", c.name);
             resultC.put("high_concept", c.high_concept);
             resultC.put("thumb_url", "<a href='"+ routes.CompanyController.show(c.id.toString()) +"'><img class='company_thumb_url' src='"+c.thumb_url+"' /></a>");
-            //resultC.put("markets", c.markets.toString());
+            resultC.put("markets", c.markets.toString());
             //resultC.put("company_url", c.company_url);
             //resultC.put("twitter_url", c.twitter_url);
             //resultC.put("facebook_url", c.facebook_url);

@@ -36,7 +36,7 @@
           .withOption("bSortable", false).withOption("bSortable", false),
           DTColumnBuilder.newColumn('name').withTitle('Name'),
           DTColumnBuilder.newColumn('high_concept').withTitle('Overview')
-          .withOption("bSearchable", false).withOption("bSortable", false)
+          .withOption("bSearchable", true).withOption("bSortable", false)
       ];
 
     });
